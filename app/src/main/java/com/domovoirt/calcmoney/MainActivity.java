@@ -11,8 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+    Button btnAdd, btnRead, btnClear;
+    EditText etName, etEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
