@@ -1,5 +1,7 @@
 package com.domovoirt.calcmoney;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,14 +20,16 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnAdd, btnRead, btnClear;
     EditText etName, etEmail;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //region
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //endregion
         Button btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(this);
         Button btnRead = findViewById(R.id.btnRead);
@@ -36,14 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EditText etName = findViewById(R.id.etName);
         EditText etEmail = findViewById(R.id.etEmail);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        dbHelper = new DBHelper(this);
+
+
     }
 
     @Override
@@ -73,9 +72,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String name, email;
         name = etName.getText().toString();
         email = etEmail.getText().toString();
+
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+
         switch (view.getId()) {
             case (R.id.btnAdd):
-                //
+                contentValues.put(dbHelper.KEY_NAME, name);
+                contentValues.put(dbHelper.KEY_MAIL, email);
+
+                database.insert(DBHelper.TABLE_CONTACTS,null,
+                        contentValues);
                 break;
             case (R.id.btnRead):
                 //
