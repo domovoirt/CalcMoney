@@ -13,8 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnAdd, btnRead, btnClear;
     EditText etName, etEmail;
 
@@ -24,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(this);
+        Button btnRead = findViewById(R.id.btnRead);
+        btnRead.setOnClickListener(this);
+        Button btnClear = findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(this);
+
+        EditText etName = findViewById(R.id.etName);
+        EditText etEmail = findViewById(R.id.etEmail);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,5 +66,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        String name, email;
+        name = etName.getText().toString();
+        email = etEmail.getText().toString();
+        switch (view.getId()) {
+            case (R.id.btnAdd):
+                //
+                break;
+            case (R.id.btnRead):
+                //
+                break;
+            case (R.id.btnClear):
+                //
+                break;
+
+        }
     }
 }
